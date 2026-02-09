@@ -41,6 +41,20 @@ class GameBoard:
         print("\n   +----+----+----+----+----+----+----+")
         self._print_board_footer()
 
+
+    def reset_board(self):
+        pass
+
+    def check_turn(self, column: int):
+        pass
+
+    def check_for_winner(self):
+        pass
+
+    def check_for_draw(self):
+        pass
+
+
 if __name__ == "__main__":
     board = GameBoard()
     board.print_board()
