@@ -2,17 +2,18 @@
 
 class GameBoard:
 
-    rows = 6
-    columns = 7
-    possibleColumns = ["1", "2", "3", "4", "5", "6", "7"]
-    board = [
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-    ]
+    def __init__(self):
+        self._rows = 6
+        self._columns = 7
+        self._possibleColumns = possibleColumns = ["1", "2", "3", "4", "5", "6", "7"]
+        self._board = [
+            ["", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", ""],
+        ]
 
     def _print_board_header(self):
         print("\nWelcome to Connect 4 game!")
@@ -25,17 +26,17 @@ class GameBoard:
         self._print_board_header()
         print("\n     1    2    3    4    5    6    7   ", end="")
 
-        for x in range(self.rows):
+        for x in range(self._rows):
             print("\n   +----+----+----+----+----+----+----+")
             print(x, " |", end="")
 
-            for y in range(self.columns):
-                if self.board[x][y] == "🟡":
-                    print("", self.board[x][y], end=" |")
-                elif self.board[x][y] == "🔴":
-                    print("", self.board[x][y], end=" |")
+            for y in range(self._columns):
+                if self._board[x][y] == "🟡":
+                    print("", self._board[x][y], end=" |")
+                elif self._board[x][y] == "🔴":
+                    print("", self._board[x][y], end=" |")
                 else:
-                    print(" ", self.board[x][y], end="  |")
+                    print(" ", self._board[x][y], end="  |")
 
         print("\n   +----+----+----+----+----+----+----+")
         self._print_board_footer()
