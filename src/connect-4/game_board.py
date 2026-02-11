@@ -16,7 +16,6 @@ class GameBoard:
         """
         self._ROW_COUNT = 6
         self._COLUMN_COUNT = 7
-        self._possibleColumns = ["0", "1", "2", "3", "4", "5", "6"]
         self._board = [
             ["", "", "", "", "", "", ""],
             ["", "", "", "", "", "", ""],
@@ -38,12 +37,10 @@ class GameBoard:
             print(x, " |", end="")
 
             for y in range(self._COLUMN_COUNT):
-                if self._board[x][y] == "🟡":
-                    print("", self._board[x][y], end=" |")
-                elif self._board[x][y] == "🔴":
-                    print("", self._board[x][y], end=" |")
-                else:
+                if self._board[x][y] == "":
                     print(" ", self._board[x][y], end="  |")
+                else:
+                    print("", self._board[x][y], end=" |")
 
         print("\n   +----+----+----+----+----+----+----+")
 
@@ -82,24 +79,7 @@ class GameBoard:
                         self._board[i][column] = "🟡"
                         return True
 
-    def _count_direction(self, row: int, column: int, delta_row: int, delta_column: int, color: str):
-        """
-
-
-        Parameters
-        ----------
-        :param row:
-        :param column:
-        :param delta_row:
-        :param delta_column:
-        :param color:
-
-        Returns
-        -------
-        :return:
-        """
-
-        pass
+            return False
 
     def check_for_winner(self, coin) -> bool:
         """
@@ -143,6 +123,8 @@ class GameBoard:
             for c in range(self._COLUMN_COUNT - 3):
                 if self._board[r][c] == coin and self._board[r - 1][c + 1] == coin and self._board[r - 2][c - 2] == coin and self._board[r - 3][c - 3] == coin:
                     return True
+
+        return False
 
     def check_for_draw(self) -> bool:
         """
