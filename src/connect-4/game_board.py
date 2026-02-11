@@ -121,7 +121,7 @@ class GameBoard:
         # check for negative diagonal win:
         for r in range(3, self._ROW_COUNT):
             for c in range(self._COLUMN_COUNT - 3):
-                if self._board[r][c] == coin and self._board[r - 1][c + 1] == coin and self._board[r - 2][c - 2] == coin and self._board[r - 3][c - 3] == coin:
+                if self._board[r][c] == coin and self._board[r - 1][c + 1] == coin and self._board[r - 2][c + 2] == coin and self._board[r - 3][c + 3] == coin:
                     return True
 
         return False
