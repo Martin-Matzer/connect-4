@@ -1,8 +1,19 @@
 
 
 class GameBoard:
+    """
+    This class is responsible to hold the data regarding the game board and provide the necessary methods for board handling.
+
+    While initialising the class, an empty game board will be created and some constants regarding the row and column count are defined.
+    The current state of the board during the game will be stored in the class.
+    It provides also all necessary methods for printing the board to the command line, adding a new coin to the board + checking if the turn is valid,
+    checking for winner or draw and resetting the board state if a new game is started.
+    """
 
     def __init__(self):
+        """
+        Initialises the class GameBoard, defines some constants and creates an empty game board.
+        """
         self._ROW_COUNT = 6
         self._COLUMN_COUNT = 7
         self._possibleColumns = ["0", "1", "2", "3", "4", "5", "6"]
@@ -15,22 +26,11 @@ class GameBoard:
             ["", "", "", "", "", "", ""],
         ]
 
-    def _print_board_header(self):
-        print("\nWelcome to Connect 4 game!")
-
-    def _print_board_footer(self):
-        #print("\nIn which column would you like to place your next chip?")
-        pass
-
     def print_board(self):
         """
-        Method for printing the current state of the game board to the command line.
-
-        Returns
-        -------
-        :return:
+        Method for printing the current state of the game board which is stored in the protected attribut _board to the command line.
         """
-        self._print_board_header()
+
         print("\n     0    1    2    3    4    5    6   ", end="")
 
         for x in range(self._ROW_COUNT):
@@ -46,7 +46,6 @@ class GameBoard:
                     print(" ", self._board[x][y], end="  |")
 
         print("\n   +----+----+----+----+----+----+----+")
-        self._print_board_footer()
 
     def add_coin(self, color: str, column: int) -> bool:
         """
@@ -166,10 +165,6 @@ class GameBoard:
     def reset_board(self):
         """
         Method for removing all coins from the game board for starting a new game.
-
-        Returns
-        -------
-        :return:
         """
 
         self._board = [
