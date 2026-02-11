@@ -5,7 +5,7 @@ class GameBoard:
     def __init__(self):
         self._rows = 6
         self._columns = 7
-        self._possibleColumns = possibleColumns = ["1", "2", "3", "4", "5", "6", "7"]
+        self._possibleColumns = ["0", "1", "2", "3", "4", "5", "6"]
         self._board = [
             ["", "", "", "", "", "", ""],
             ["", "", "", "", "", "", ""],
@@ -23,8 +23,12 @@ class GameBoard:
         pass
 
     def print_board(self):
+        """
+        Method for printing the current state of the game board to the command line.
+        :return:
+        """
         self._print_board_header()
-        print("\n     1    2    3    4    5    6    7   ", end="")
+        print("\n     0    1    2    3    4    5    6   ", end="")
 
         for x in range(self._rows):
             print("\n   +----+----+----+----+----+----+----+")
@@ -52,26 +56,38 @@ class GameBoard:
         """
 
         # Check if the given column is already full
-        if self._board[0][column - 1] != "":
+        if self._board[0][column] != "":
             return False
         else:
             # Add coin to the lowest possible row
             for i in range(self._rows - 1, -1, -1):
-                if self._board[i][column - 1] == "":
+                if self._board[i][column] == "":
                     if color == "red":
-                        self._board[i][column - 1] = "🔴"
+                        self._board[i][column] = "🔴"
                         return True
                     else:
-                        self._board[i][column - 1] = "🟡"
+                        self._board[i][column] = "🟡"
                         return True
+
+    def _count_direction(self, row: int, column: int, delta_row: int, delta_column: int, color: str):
+
+        if color == "red":
+            coin = "🔴"
+        else:
+            coin = "🟡"
+
+        count = 0
+
+
+
 
     def check_for_winner(self) -> str:
         pass
 
     def check_for_draw(self) -> bool:
         """
-
-        :return:
+        Method to check if the game board is already full. This would mean that the game ended with draw.
+        :return: bool - True if draw otherwise False
         """
 
         draw = True
