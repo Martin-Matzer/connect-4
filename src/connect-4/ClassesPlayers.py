@@ -32,10 +32,6 @@ class Players(ABC):
     def play_turn(self):
         pass
 
-    @abstractmethod
-    def surrender_game(self):
-        pass
-
 
 class HumanPlayer(Players):
 
@@ -60,12 +56,8 @@ class Bot(Players):
         self.current_turns += 1
         self.total_turns += 1
 
-    def surrender_game(self):
-        print("Hansi never  surrenders 😎")
-        #Method even needed?
 
-
-"""
+""" Tests will be removed after completiion
 if __name__ == '__main__':
     p1 = HumanPlayer()
     print(p1)
