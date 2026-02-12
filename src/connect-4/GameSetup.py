@@ -20,25 +20,25 @@ class GameSetup:
     def create_players(self, num_players):
         players = []
         for i in range(num_players):
-            player = HumanPlayer(f"p{i+1}")
+            player = HumanPlayer(f"Player{i+1}")
             players.append(player)
         if num_players == 1:
-            players.append(Bot("p2"))
+            players.append(Bot("Hansi"))
         return players
 
     # Selects starting player
     def pick_starting_player(self, players:list):
         starter = random.choice(players)
-        print(f"{starter.color} beginnt!")
+        print(f"Player {starter.name} beginnt!")
         starter.onturn = True
 
 #Tests for created methods
 #Will be removed after final testing
-setup = GameSetup()
-num_players = setup.choose_players()
-print(num_players)
-players = setup.create_players(num_players)
-print(players)
-print(players[0], players[1])
+#setup = GameSetup()
+#num_players = setup.choose_players()
+#print(num_players)
+#players = setup.create_players(num_players)
+#print(players)
+#print(players[0], players[1])
 
-setup.pick_starting_player(players)
+#setup.pick_starting_player(players)
