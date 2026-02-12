@@ -7,7 +7,7 @@ class Players(ABC):
     _next_player_no = 1
 
     # Player No cannot be assigned manually - done by system
-    def __init__(self, name):
+    def __init__(self, _name):
         self._player_no = Players._next_player_no
         Players._next_player_no += 1
         self._name = _name
