@@ -21,61 +21,41 @@ print("Let's begin! \n\n")
 
 #Create setup
 setup = GameSetup()
-#Select number of players
-num_players = setup.choose_players()
-#Create player objects
-players = setup.create_players(num_players)
-
-#Select starting player
-starter = setup.pick_starting_player(players)
-
-#Assigning player1 and player2
-player1 = starter
-player2 = players[0] if starter is players[1] else players[1]
-
 
 #Create empty board
 board = GameBoard()
 
-#Print empty board
-board.print_board()
+#Select number of players
+num_players = setup.choose_players()
 
-#Play game until one winner or draw 
-game_over = False
+#Create player objects
+players = setup.create_players(num_players)
 
-while not game_over:
+while True:
+    #Select starting player
+    starter = setup.pick_starting_player(players)
 
-    move = player1.play_turn(board)
-    if move is None:
-        print(f"{player2.name} has won the game! {player1.name} surrendered.")
-        game_over = True
-        break
+    #Assigning player1 and player2
+    player1 = starter
+    player2 = players[0] if starter is players[1] else players[1]
 
-    while not board.add_coin(player1.color, move):
-        print("The last turn was not valid. Please enter a valid column.")
-
+    #Print empty board
     board.print_board()
 
-    if board.check_for_winner(player1.color):
-        print("Player1 has won the game!")
-        game_over = True
-        break
+    #Play game until one winner or draw 
+    game_over = False
+    while not game_over:
 
-    elif board.check_for_draw():
-        print("Game has ended with a draw.")
-        game_over = True
-        break
+        move = player1.play_turn(board)
+        if move is None:
+            print(f"{player2.name} has won the game! {player1.name} surrendered.")
+            game_over = True
+            break
 
+        while not board.add_coin(player1.color, move):
+            print("The last turn was not valid. Please enter a valid column.")
 
-    move = player2.play_turn(board)
-    if move is None:
-        print(f"{player1.name} has won the game! {player2.name} surrendered.")
-        game_over = True
-        break
-    
-
-    while not board.add_coin(player2.color, move):
-        print("The last turn was not valid. Please enter a valid column.")
+        board.print_board()
 
         if board.check_for_winner(player1.color):
             print("Player1 has won the game!")
@@ -87,7 +67,34 @@ while not game_over:
             game_over = True
             break
 
-    board.print_board()
 
+        move = player2.play_turn(board)
+        if move is None:
+            print(f"{player1.name} has won the game! {player2.name} surrendered.")
+            game_over = True
+            break
+        
 
-#Empty board and possibly restart game
+        while not board.add_coin(player2.color, move):
+            print("The last turn was not valid. Please enter a valid column.")
+
+        board.print_board()
+
+        if board.check_for_winner(player1.color):
+            print("Player1 has won the game!")
+            game_over = True
+            break
+
+        elif board.check_for_draw():
+            print("Game has ended with a draw.")
+            game_over = True
+            break
+    #End game
+
+    #Clear board
+    board.reset_board()
+
+    #Option to play again
+    if not setup.choose_to_play_again():
+        print("Thanks for playing!")
+        break    
