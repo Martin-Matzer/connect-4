@@ -80,8 +80,8 @@ while True:
 
         board.print_board()
 
-        if board.check_for_winner(player1.color):
-            print("Player1 has won the game!")
+        if board.check_for_winner(player2.color):
+            print("Player2 has won the game!")
             game_over = True
             break
 
