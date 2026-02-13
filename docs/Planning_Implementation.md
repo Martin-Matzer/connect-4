@@ -2,9 +2,9 @@
 Before programming the game, it was decided which classes, methods and attributes will most likely be needed. <br>
 All classes, methods and attributres are also named in the respective Github issues.
 
-## Initial structure
+## Initial class diagram
 <!-- insert class diagram -->
-![Diagram](class-diagram.png)
+![Diagram](class_diagram_initial.jpeg)
 
 The necessary parts for the game were divided in individual classes. Required attributes and methods are mapped in the diagram. As the diagram only shows the first idea, the relations and structure in the finished game may differ from the original structure.
 
@@ -20,4 +20,4 @@ The main game loop alternates player turns, validates moves, detects surrender e
 Bot behavior differs by implementation: the basic bot plays randomly, while the smart bot evaluates potential moves to win or block the opponent.
 
 ## New class diagram
-![Diagram](class-diagram-new.png)
+![Diagram](class_diagram_adapted.jpeg)
