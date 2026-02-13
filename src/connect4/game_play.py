@@ -85,7 +85,7 @@ while True:
             game_over = True
             break
 
-        # Keep asking until the coin is placed (handle full column or invalid column)
+        # Keep asking until the coin is placed (full or invalid column)
         while True:
             result = board.add_coin(player2.color, move)
             if result is True:
