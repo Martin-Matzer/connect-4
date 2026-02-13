@@ -93,11 +93,134 @@ class TestAddCoin(unittest.TestCase):
         self.assertEqual(self.board._board, board_copy)
 
 class TestWinCheck(unittest.TestCase):
-    pass
+    """
+    Test suite for the check_for_winner() method.
+
+    Tests cover:
+    - No winner on empty or partial board
+    - Horizontal win (4 in a row)
+    - Vertical win (4 in a column)
+    - Positive diagonal (top-left to bottom-right)
+    - Negative diagonal (bottom-left to top-right)
+    - Only the color that has 4 in a row wins; the other does not
+    """
+
+    def setUp(self):
+        """Create a fresh GameBoard before each test."""
+        self.board = GameBoard()
+
+    def test_no_winner_on_empty_board(self):
+        """Neither color should win on an empty board."""
+        self.assertFalse(self.board.check_for_winner("red"))
+        self.assertFalse(self.board.check_for_winner("yellow"))
+
+    def test_no_winner_with_few_coins(self):
+        """Three in a row should not count as a win."""
+        for col in range(3):
+            self.board.add_coin("red", col)
+        self.assertFalse(self.board.check_for_winner("red"))
+        self.assertFalse(self.board.check_for_winner("yellow"))
+
+    def test_horizontal_win_red(self):
+        """Four red coins in a horizontal row should make red the winner."""
+        for col in range(4):
+            self.board.add_coin("red", col)
+        self.assertTrue(self.board.check_for_winner("red"))
+        self.assertFalse(self.board.check_for_winner("yellow"))
+
+    def test_horizontal_win_yellow(self):
+        """Four yellow coins in a horizontal row should make yellow the winner."""
+        for col in range(2, 6):
+            self.board.add_coin("yellow", col)
+        self.assertTrue(self.board.check_for_winner("yellow"))
+        self.assertFalse(self.board.check_for_winner("red"))
+
+    def test_vertical_win_red(self):
+        """Four red coins in one column should make red the winner."""
+        for _ in range(4):
+            self.board.add_coin("red", 3)
+        self.assertTrue(self.board.check_for_winner("red"))
+        self.assertFalse(self.board.check_for_winner("yellow"))
+
+    def test_vertical_win_yellow(self):
+        """Four yellow coins in one column should make yellow the winner."""
+        for _ in range(4):
+            self.board.add_coin("yellow", 0)
+        self.assertTrue(self.board.check_for_winner("yellow"))
+        self.assertFalse(self.board.check_for_winner("red"))
+
+    def test_positive_diagonal_win_red(self):
+        """Four red coins on a positive diagonal (middle-left to bottom-middle) should make red the winner."""
+        # Build diagonal at positions (2,0), (3,1), (4,2), (5,3) by filling below with other color
+        self.board._board[2][0] = COIN_RED
+        self.board._board[3][1] = COIN_RED
+        self.board._board[4][2] = COIN_RED
+        self.board._board[5][3] = COIN_RED
+        self.assertTrue(self.board.check_for_winner("red"))
+        self.assertFalse(self.board.check_for_winner("yellow"))
+    
+    def test_positive_diagonal_win_yellow(self):
+        """Four yellow coins on a positive diagonal (top-middle to middle-right) should make yellow the winner."""
+        # Build diagonal at positions (0,3), (1,4), (2,5), (3,6) by filling below with other color
+        self.board._board[0][3] = COIN_YELLOW
+        self.board._board[1][4] = COIN_YELLOW
+        self.board._board[2][5] = COIN_YELLOW
+        self.board._board[3][6] = COIN_YELLOW
+        self.assertTrue(self.board.check_for_winner("yellow"))
+        self.assertFalse(self.board.check_for_winner("red"))
+
+    def test_negative_diagonal_win_red(self):
+        """Four red coins on a negative diagonal (middle-middle to top-right) should make red the winner."""
+        # Build diagonal at (3,3), (2,4), (1,5), (0,6)
+        self.board._board[3][3] = COIN_RED
+        self.board._board[2][4] = COIN_RED
+        self.board._board[1][5] = COIN_RED
+        self.board._board[0][6] = COIN_RED
+        self.assertTrue(self.board.check_for_winner("red"))
+        self.assertFalse(self.board.check_for_winner("yellow"))
+
+    def test_negative_diagonal_win_yellow(self):
+        """Four yellow coins on a negative diagonal (bottom-left to middle-middle) should make yellow the winner."""
+        # Build diagonal at (5,0), (4,1), (3,2), (2,3)
+        self.board._board[3][3] = COIN_YELLOW
+        self.board._board[2][4] = COIN_YELLOW
+        self.board._board[1][5] = COIN_YELLOW
+        self.board._board[0][6] = COIN_YELLOW
+        self.assertTrue(self.board.check_for_winner("yellow"))
+        self.assertFalse(self.board.check_for_winner("red"))
 
 
 class TestDrawCheck(unittest.TestCase):
-    pass
+    """
+    Test suite for the check_for_draw() method.
+
+    Tests cover:
+    - Empty board is not a draw
+    - Partially filled board is not a draw
+    - Full board is a draw
+    """
+
+    def setUp(self):
+        """Create a fresh GameBoard before each test."""
+        self.board = GameBoard()
+
+    def test_empty_board_is_not_draw(self):
+        """An empty board should not be considered a draw."""
+        self.assertFalse(self.board.check_for_draw())
+
+    def test_partially_filled_board_is_not_draw(self):
+        """A board with some coins but free columns should not be a draw."""
+        for col in range(4):
+            for _ in range(6):
+                self.board.add_coin("red" if col % 2 == 0 else "yellow", col)
+        self.assertFalse(self.board.check_for_draw())
+
+    def test_full_board_is_draw(self):
+        """When every column is full (top row has no empty cell), the game is a draw."""
+        for col in range(7):
+            for _ in range(6):
+                self.board.add_coin("red" if col % 2 == 0 else "yellow", col)
+        self.assertTrue(self.board.check_for_draw())
 
 
 if __name__ == "__main__":
