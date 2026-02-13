@@ -8,21 +8,21 @@ class Player(ABC):
 
     # Player No cannot be assigned manually - done by system
     def __init__(self, name):
-        self._player_no = Player._next_player_no
-        Player._next_player_no += 1
+        self._player_number = Player._next_player_number
+        Player._next_player_number += 1
         self._name = name
-        if self._player_no == 1:
+        if self._player_number == 1:
             self._color = "red"
         else:
             self._color = "yellow"
 
     def __str__(self):
-        return f"Player{self.player_no}: {self.color}"
+        return f"Player{self._player_number}: {self.color}"
 
     #Getter for protected attributes
     @property
-    def player_no(self):
-        return self._player_no
+    def player_number(self):
+        return self._player_number
     
     @property
     def name(self):
@@ -42,15 +42,15 @@ class Player(ABC):
 class HumanPlayer(Player):
 
     def surrender(self):
-        print(f"Player {self.player_no} surrendered!")
+        print(f"Player {self.player_number} surrendered!")
 
-    def play_turn(self, board):
+    def play_turn(self, board) -> int:
         while True:
-            column = input(f"Player{self.player_no}, choose column: ")
+            column = input(f"Player{self.player_number}, choose column: ")
             if column in ("0", "1", "2", "3", "4", "5", "6"):
                 return int(column)
             elif column == "I surrender!":
-                self.surrender_game()
+                self.surrender()
                 return None
             else:
                 print("Invalid input. Please enter a column or surrender your soul.\n")
@@ -58,7 +58,7 @@ class HumanPlayer(Player):
 
 class Bot(Player):
 
-    def play_turn(self, board):
+    def play_turn(self, board) -> int:
         column = random.randint(0, 6)
         print(f"{self.name} plays column {column}")
         return column
@@ -67,7 +67,7 @@ class Bot(Player):
 
 class SmartBot(Player):
 
-    def play_turn(self, board):
+    def play_turn(self, board) -> int:
         valid_columns = self._valid_columns(board)
 
         # 1) Check for win 

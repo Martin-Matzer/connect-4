@@ -19,7 +19,7 @@ class GameSetup:
     #Method to select difficulty of bot
     def choose_bot_difficulty(self) -> int:
         while True:
-            print("Choose bot difficulty:")
+            print("\nChoose bot difficulty:")
             print("0 - play against Hansi")
             print("1 - play against SuperHansi")
             selection = input("> ").strip()
@@ -44,7 +44,7 @@ class GameSetup:
     # Selects starting player
     def pick_starting_player(self, players: list):
         starter = random.choice(players)
-        print(f"{starter.name} begins!")
+        print(f"\n{starter.name} begins!")
         return starter
         
 

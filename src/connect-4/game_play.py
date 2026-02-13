@@ -1,9 +1,21 @@
 #File to execute the game logic itself
-from GameSetup import GameSetup
-from ClassesPlayers import HumanPlayer, Bot
+from game_setup import GameSetup
+from players import HumanPlayer, Bot
 from game_board import GameBoard
 
 print("Welcome to Connect-4!")
+print("""
+    Rules:
+    Players take turns dropping one disc into any column.
+    The disc falls to the lowest empty space in that column.
+    The goal is to connect four of your discs in a row (horizontal, vertical, or diagonal).
+    The first player to connect four wins.
+    If the grid fills and no one connects four, the game is a draw.
+    -------------
+    To surrender the game please enter "I surrender!" on your turn.
+    """)
+print("Let's begin! \n\n")
+
 
 #Outline logic for game
 
@@ -13,24 +25,22 @@ setup = GameSetup()
 num_players = setup.choose_players()
 #Create player objects
 players = setup.create_players(num_players)
-player1 = players[0]
-player2 = players[1]
 
 #Select starting player
-setup.pick_starting_player(players)
+starter = setup.pick_starting_player(players)
+
+#Assigning player1 and player2
+player1 = starter
+player2 = players[0] if starter is players[1] else players[1]
+
+
 #Create empty board
 board = GameBoard()
 
 #Print empty board
 board.print_board()
 
-#Play game until one winner or draw
-#Loop needed with methods
-#play_turn (players)
-#add_coin (board)
-#print_board 
-#check_for_winner and check_for_draw
-
+#Play game until one winner or draw 
 game_over = False
 
 while not game_over:
@@ -80,14 +90,4 @@ while not game_over:
     board.print_board()
 
 
-
-
-
-
-
-
-#If winner is existing: announce winner
-#In case of draw: announce draw
-
 #Empty board and possibly restart game
-
