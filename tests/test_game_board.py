@@ -3,11 +3,10 @@ import unittest
 
 from connect4 import GameBoard
 
-
 # Constants matching GameBoard
-COIN_RED = "🔴"
-COIN_YELLOW = "🟡"
-
+board = GameBoard()
+COIN_RED = board._COIN_RED
+COIN_YELLOW = board._COIN_YELLOW
 
 class TestAddCoin(unittest.TestCase):
     """
