@@ -1,5 +1,5 @@
 import random
-from ClassesPlayers import HumanPlayer, Bot
+from ClassesPlayers import HumanPlayer, Bot, SmartBot
 
 # Class for game setup
 # Selection for number of players and starting player
@@ -15,21 +15,36 @@ class GameSetup:
             if selection in ("1", "2"):
                 return int(selection)
             print("Invalid input. Please enter 1 or 2.\n")
+
+    #Method to select difficulty of bot
+    def choose_bot_difficulty(self) -> int:
+        while True:
+            print("Choose bot difficulty:")
+            print("0 - play against Hansi")
+            print("1 - play against SuperHansi")
+            selection = input("> ").strip()
+            if selection in ("0", "1"):
+                return int(selection)
+            print("Invalid input. Please enter 0 or 1.\n")
     
-    # Initializes bot
+    # Initializes player(s) and bot (if needed)
     def create_players(self, num_players):
         players = []
         for i in range(num_players):
             player = HumanPlayer(f"Player{i+1}")
             players.append(player)
         if num_players == 1:
-            players.append(Bot("Hansi"))
+            difficulty = self.choose_bot_difficulty()
+            if difficulty == 0:
+                players.append(Bot("Hansi"))
+            else:
+                players.append(SmartBot("SuperHansi"))
         return players
 
     # Selects starting player
     def pick_starting_player(self, players:list):
         starter = random.choice(players)
-        print(f"Player {starter.name} beginnt!")
+        print(f"{starter.name} beginns!")
         starter.onturn = True
 
 

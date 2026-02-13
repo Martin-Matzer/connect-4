@@ -35,7 +35,7 @@ class Players(ABC):
         return self._color
 
     @abstractmethod
-    def play_turn(self):
+    def play_turn(self, board):
         pass
 
 
@@ -43,7 +43,7 @@ class Players(ABC):
 
 class HumanPlayer(Players):
 
-    def play_turn(self):
+    def play_turn(self, board):
         column = int(input(f"Player {self.player_no}, choose column: "))
         print(f"Player {self.player_no} plays column {column}")
         return column
@@ -57,7 +57,7 @@ class HumanPlayer(Players):
 
 class Bot(Players):
 
-    def play_turn(self):
+    def play_turn(self, board):
         column = random.randint(0, 6)
         print(f"Hansi plays column {column}")
         return column
