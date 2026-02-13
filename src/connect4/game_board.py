@@ -83,7 +83,7 @@ class GameBoard:
 
             return False
 
-    def check_for_winner(self, coin) -> bool:
+    def check_for_winner(self, color: str) -> bool:
         """
         Check the board for winner with the provided coin.
 
@@ -91,8 +91,8 @@ class GameBoard:
 
         Parameters
         ----------
-        :param coin: str
-            Type of coin for which the win check is executed.
+        :param color: str
+            The color of the coin for which it should check for win. Either "red" or "yellow".
 
         Returns
         -------
@@ -100,6 +100,11 @@ class GameBoard:
             True if the provided coin has won.
             False if the provided coin has not won yet.
         """
+
+        if color == "red":
+            coin = "🔴"
+        else:
+            coin = "🟡"
 
         # check for horizontal win
         for r in range(self._ROW_COUNT):
@@ -175,6 +180,23 @@ if __name__ == "__main__":
     board.add_coin("red", 3)
     board.add_coin("yellow", 1)
     board.add_coin("red", 3)
+    board.print_board()
+    print(board.check_for_winner("red"))
+    print(board.check_for_winner("yellow"))
+
+    board.reset_board()
+    board.print_board()
+    board.add_coin("yellow", 0)
+    board.add_coin("red", 1)
+    board.add_coin("yellow", 1)
+    board.add_coin("red", 2)
+    board.add_coin("yellow", 3)
+    board.add_coin("red", 2)
+    board.add_coin("yellow", 2)
+    board.add_coin("red", 3)
+    board.add_coin("yellow", 3)
+    board.add_coin("red", 1)
+    board.add_coin("yellow", 3)
     board.print_board()
     print(board.check_for_winner("red"))
     print(board.check_for_winner("yellow"))
