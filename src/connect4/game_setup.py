@@ -6,7 +6,7 @@ player objects, and choosing a starting player.
 """
 
 import random
-from players import HumanPlayer, Bot, SmartBot, Player
+from .players import HumanPlayer, Bot, SmartBot, Player
 
 
 class GameSetup:
