@@ -2,24 +2,22 @@ from abc import ABC, abstractmethod
 import random
 
 #Abstract Player class to add abstract methods
-class Players(ABC):
+class Player(ABC):
 
-    _next_player_no = 1
+    _next_player_number = 1
 
     # Player No cannot be assigned manually - done by system
-    def __init__(self, _name):
-        self._player_no = Players._next_player_no
-        Players._next_player_no += 1
-        self._name = _name
-        self.onturn = False
-        #How should playing colors be assigned? Bug with more than 2 objects expected
+    def __init__(self, name):
+        self._player_no = Player._next_player_no
+        Player._next_player_no += 1
+        self._name = name
         if self._player_no == 1:
             self._color = "red"
         else:
             self._color = "yellow"
 
     def __str__(self):
-        return f"Player{self.player_no} : {self.color}"
+        return f"Player{self.player_no}: {self.color}"
 
     #Getter for protected attributes
     @property
@@ -41,9 +39,9 @@ class Players(ABC):
 
 
 
-class HumanPlayer(Players):
+class HumanPlayer(Player):
 
-    def surrender_game(self):
+    def surrender(self):
         print(f"Player {self.player_no} surrendered!")
 
     def play_turn(self, board):
@@ -58,29 +56,29 @@ class HumanPlayer(Players):
                 print("Invalid input. Please enter a column or surrender your soul.\n")
 
 
-class Bot(Players):
+class Bot(Player):
 
     def play_turn(self, board):
         column = random.randint(0, 6)
-        print(f"Hansi plays column {column}")
+        print(f"{self.name} plays column {column}")
         return column
 
 
 
-class SmartBot(Players):
+class SmartBot(Player):
 
     def play_turn(self, board):
-        valid_cols = self._valid_columns(board)
+        valid_columns = self._valid_columns(board)
 
         # 1) Check for win 
-        for column in valid_cols:
+        for column in valid_columns:
             if self._would_win(board, self.color, column):
                 print(f"{self.name} plays column {column}")
                 return column
 
         # 2) Check for blocking player
         opp_color = "yellow" if self.color == "red" else "red"
-        for column in valid_cols:
+        for column in valid_columns:
             if self._would_win(board, opp_color, column):
                 print(f"{self.name} plays column {column}")
                 return column
@@ -88,12 +86,12 @@ class SmartBot(Players):
         # 3) Prioritize playing middle columns
         preferred = [3, 2, 4, 1, 5, 0, 6]
         for column in preferred:
-            if column in valid_cols:
+            if column in valid_columns:
                 print(f"{self.name} plays column {column}")
                 return column
 
         # Fallback 
-        column = random.choice(valid_cols)
+        column = random.choice(valid_columns)
         print(f"{self.name} plays column {column}")
         return column
 
@@ -123,5 +121,5 @@ class SmartBot(Players):
 
 
 if __name__ == '__main__':
-    p1 = HumanPlayer()
-    p2 = HumanPlayer()
+    p1 = HumanPlayer("Player1")
+    p2 = HumanPlayer("Player2")

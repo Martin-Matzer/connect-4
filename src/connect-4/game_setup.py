@@ -1,5 +1,5 @@
 import random
-from ClassesPlayers import HumanPlayer, Bot, SmartBot
+from players import HumanPlayer, Bot, SmartBot
 
 # Class for game setup
 # Selection for number of players and starting player
@@ -28,7 +28,7 @@ class GameSetup:
             print("Invalid input. Please enter 0 or 1.\n")
     
     # Initializes player(s) and bot (if needed)
-    def create_players(self, num_players):
+    def create_players(self, num_players: int) -> list:
         players = []
         for i in range(num_players):
             player = HumanPlayer(f"Player{i+1}")
@@ -42,13 +42,14 @@ class GameSetup:
         return players
 
     # Selects starting player
-    def pick_starting_player(self, players:list):
+    def pick_starting_player(self, players: list):
         starter = random.choice(players)
-        print(f"{starter.name} beginns!")
-        starter.onturn = True
+        print(f"{starter.name} begins!")
+        return starter
+        
 
     # Method to trigger play again
-    def play_again(self):
+    def choose_to_play_again(self):
         while True:
             play_again = input("Play again? Please enter yes or no:").lower()
             if play_again == "yes":
