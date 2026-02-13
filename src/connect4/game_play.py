@@ -52,8 +52,19 @@ while True:
             game_over = True
             break
 
-        while not board.add_coin(player1.color, move):
-            print("The last turn was not valid. Please enter a valid column.")
+        # Keep asking until the coin is placed (full or invalid column)
+        while True:
+            result = board.add_coin(player1.color, move)
+            if result is True:
+                break
+            print(result if type(result) == str else "The last turn was not valid. Please enter a valid column.")
+            move = player1.play_turn(board)
+            if move is None:
+                print(f"{player2.name} has won the game! {player1.name} surrendered.")
+                game_over = True
+                break
+        if move is None:
+            break
 
         board.print_board()
 
@@ -73,15 +84,25 @@ while True:
             print(f"{player1.name} has won the game! {player2.name} surrendered.")
             game_over = True
             break
-        
 
-        while not board.add_coin(player2.color, move):
-            print("The last turn was not valid. Please enter a valid column.")
+        # Keep asking until the coin is placed (full or invalid column)
+        while True:
+            result = board.add_coin(player2.color, move)
+            if result is True:
+                break
+            print(result if type(result) == str else "The last turn was not valid. Please enter a valid column.")
+            move = player2.play_turn(board)
+            if move is None:
+                print(f"{player1.name} has won the game! {player2.name} surrendered.")
+                game_over = True
+                break
+        if move is None:
+            break
 
         board.print_board()
 
         if board.check_for_winner(player2.color):
-            print(f"{player2.name}has won the game!")
+            print(f"{player2.name} has won the game!")
             game_over = True
             break
 
