@@ -86,12 +86,12 @@ class SmartBot(Players):
         preferred = [3, 2, 4, 1, 5, 0, 6]
         for column in preferred:
             if column in valid_cols:
-                print(f"{self.name} plays column {c}")
+                print(f"{self.name} plays column {column}")
                 return column
 
         # Fallback 
         column = random.choice(valid_cols)
-        print(f"{self.name} plays column {c}")
+        print(f"{self.name} plays column {column}")
         return column
 
 
