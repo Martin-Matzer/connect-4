@@ -16,6 +16,8 @@ class GameBoard:
         """
         self._ROW_COUNT = 6
         self._COLUMN_COUNT = 7
+        self._COIN_RED = "🔴"
+        self._COIN_YELLOW = "🟡"
         self._board = [
             ["", "", "", "", "", "", ""],
             ["", "", "", "", "", "", ""],
@@ -73,10 +75,10 @@ class GameBoard:
             for i in range(self._ROW_COUNT - 1, -1, -1):
                 if self._board[i][column] == "":
                     if color == "red":
-                        self._board[i][column] = "🔴"
+                        self._board[i][column] = self._COIN_RED
                         return True
                     else:
-                        self._board[i][column] = "🟡"
+                        self._board[i][column] = self._COIN_YELLOW
                         return True
 
             return False
@@ -167,3 +169,34 @@ class GameBoard:
 if __name__ == "__main__":
     board = GameBoard()
     board.print_board()
+    board.add_coin("red", 0)
+    board.add_coin("yellow", 1)
+    board.add_coin("red", 1)
+    board.add_coin("yellow", 2)
+    board.add_coin("red", 3)
+    board.add_coin("yellow", 2)
+    board.add_coin("red", 2)
+    board.add_coin("yellow", 3)
+    board.add_coin("red", 3)
+    board.add_coin("yellow", 1)
+    board.add_coin("red", 3)
+    board.print_board()
+    print(board.check_for_winner("red"))
+    print(board.check_for_winner("yellow"))
+
+    board.reset_board()
+    board.print_board()
+    board.add_coin("yellow", 0)
+    board.add_coin("red", 1)
+    board.add_coin("yellow", 1)
+    board.add_coin("red", 2)
+    board.add_coin("yellow", 3)
+    board.add_coin("red", 2)
+    board.add_coin("yellow", 2)
+    board.add_coin("red", 3)
+    board.add_coin("yellow", 3)
+    board.add_coin("red", 1)
+    board.add_coin("yellow", 3)
+    board.print_board()
+    print(board.check_for_winner("red"))
+    print(board.check_for_winner("yellow"))
