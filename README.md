@@ -10,9 +10,9 @@ Game was developed by Melina Fellner and Martin Matzer.
         pip install .
 
 ## How to run the game
-1. Open main.py file
-2. Execute main.py file
-3. Open console and follow the ganme instructions
+1. Open game_play.py file in folder src/connect4
+2. Execute game_play.py file
+3. Open console and follow the game instructions
 
 ## How to run unit tests
 
