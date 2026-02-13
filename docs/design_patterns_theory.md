@@ -1,5 +1,5 @@
 # Design Patterns Theory
-In this document the design pattern observer is described. <br>
+In this document the design patterns observer and decorator are described. <br>
 Source: https://refactoring.guru/design-patterns/catalog
 
 ## Pattern: Observer
@@ -19,3 +19,13 @@ A simple way to understand this pattern is to compare it to everyday subscriptio
 they automatically receive updates whenever new content is published. The subscriber chooses what they want to follow and is notified without having to manually check for changes. 
 In this comparison, the subscriber acts like the observer, while the newsletter or channel represents the subject. 
 This illustrates how the Observer pattern allows interested parties to stay informed efficiently while remaining independent.
+
+
+## Pattern: Decorator
+The Decorator pattern is a structural design pattern that makes it possible to extend an object’s behavior without directly modifying its original code. It is useful when software components need additional features, but changing the base implementation would make the system harder to maintain. Creating many subclasses for every variation can also lead to unnecessary complexity and reduce clarity. <br>
+
+Instead of altering the original object, the Decorator pattern adds functionality by placing another object around it. This outer object provides extra behavior while still supporting the same interface as the wrapped object. Because both objects follow the same structure, they can be used interchangeably. Several decorators can be combined to gradually build more advanced behavior, with each decorator contributing a specific feature. <br>
+
+The core idea is to keep the original object focused on its main responsibility while allowing enhancements to be added when required. This approach improves flexibility, since new features can be introduced without rewriting existing components. It also helps maintain clean and organized code, because responsibilities remain separated.<br>
+
+A practical way to imagine this pattern is customizing a basic product. For example, a plain coffee can be enhanced with milk, syrup, or whipped cream. The base drink stays the same, but each addition changes the final result. In the same way, decorators add optional behavior to an object without replacing its original purpose.
