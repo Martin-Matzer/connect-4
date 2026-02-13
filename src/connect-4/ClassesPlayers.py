@@ -45,10 +45,11 @@ class Players(ABC):
 class HumanPlayer(Players):
 
     def play_turn(self):
-        column = input(f"Player {self.player_no}, choose column: ")
+        column = int(input(f"Player {self.player_no}, choose column: "))
         print(f"Player {self.player_no} plays column {column}")
         self.current_turns += 1
         self.total_turns += 1
+        return column
 
 
     def surrender_game(self):
@@ -64,6 +65,7 @@ class Bot(Players):
         print(f"Hansi plays column {column}")
         self.current_turns += 1
         self.total_turns += 1
+        return column
 
 
 """ Tests will be removed after completiion
