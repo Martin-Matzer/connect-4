@@ -12,3 +12,12 @@ The necessary parts for the game were divided in individual classes. Required at
 
 ### Rules are included in GameBoard class
 While implementing it was decided to add the methods of the planned Rules class into the GameBoard class. This was decided because it makes more sense as the GameBoard class does hold the data and state of the board. If someone checks in real life e.g. for winner or valid turn, they also look at the board to get the answer.
+
+## Summary of all further changes:
+An abstract Player class defines a shared interface for all player types, allowing human players and bots to interact with the game through the same turn mechanism.
+GameSetup handles all pre-game and post-game interaction, including player creation, bot selection, and choosing the starting player.
+The main game loop alternates player turns, validates moves, detects surrender events, and continuously checks for win or draw conditions.
+Bot behavior differs by implementation: the basic bot plays randomly, while the smart bot evaluates potential moves to win or block the opponent.
+
+## New class diagram
+![Diagram](class-diagram-new.png)
