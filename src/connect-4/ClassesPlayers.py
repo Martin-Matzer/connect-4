@@ -12,9 +12,6 @@ class Players(ABC):
         Players._next_player_no += 1
         self._name = _name
         self.onturn = False
-        self.total_wins = 0
-        self.total_turns = 0
-        self.current_turns = 0
         #How should playing colors be assigned? Bug with more than 2 objects expected
         if self._player_no == 1:
             self._color = "red"
@@ -47,15 +44,11 @@ class HumanPlayer(Players):
     def play_turn(self):
         column = int(input(f"Player {self.player_no}, choose column: "))
         print(f"Player {self.player_no} plays column {column}")
-        self.current_turns += 1
-        self.total_turns += 1
         return column
 
 
     def surrender_game(self):
         print(f"Player {self.player_no} surrendered!")
-        #To Do
-        #how to access total wins of other player?
 
 
 class Bot(Players):
@@ -63,19 +56,10 @@ class Bot(Players):
     def play_turn(self):
         column = random.randint(0, 6)
         print(f"Hansi plays column {column}")
-        self.current_turns += 1
-        self.total_turns += 1
         return column
 
 
-""" Tests will be removed after completiion
+
 if __name__ == '__main__':
     p1 = HumanPlayer()
-    print(p1)
     p2 = HumanPlayer()
-    print(p2)
-    p3 = Bot()
-    print(p3)
-    p3.play_turn()
-
-"""

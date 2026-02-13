@@ -32,13 +32,12 @@ class GameSetup:
         print(f"Player {starter.name} beginnt!")
         starter.onturn = True
 
-#Tests for created methods
-#Will be removed after final testing
-#setup = GameSetup()
-#num_players = setup.choose_players()
-#print(num_players)
-#players = setup.create_players(num_players)
-#print(players)
-#print(players[0], players[1])
 
-#setup.pick_starting_player(players)
+if __name__ == '__main__':
+    setup = GameSetup()
+    num_players = setup.choose_players()
+    print(num_players)
+    players = setup.create_players(num_players)
+    print(players)
+    print(players[0], players[1])
+    setup.pick_starting_player(players)
