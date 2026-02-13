@@ -66,11 +66,16 @@ class GameBoard:
             True for a valid turn and successful adding to game board.
             False for a not valid turn when coin cannot be added to the given column.
             "Error, invalid column!" if the provided column is not valid.
+            "Error, invalid color!" if the provided color is not "red" or "yellow".
         """
 
         # Check if the provided column is in valid range
         if column < 0 or column >= self._COLUMN_COUNT:
             return "Error, invalid column!"
+
+        # Check if the provided color is valid
+        if color not in ("red", "yellow"):
+            return "Error, invalid color!"
 
         # Check if the given column is already full
         if self._board[0][column] != "":
