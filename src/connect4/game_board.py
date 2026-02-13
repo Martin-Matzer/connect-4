@@ -16,6 +16,8 @@ class GameBoard:
         """
         self._ROW_COUNT = 6
         self._COLUMN_COUNT = 7
+        self._COIN_RED = "🔴"
+        self._COIN_YELLOW = "🟡"
         self._board = [
             ["", "", "", "", "", "", ""],
             ["", "", "", "", "", "", ""],
@@ -73,10 +75,10 @@ class GameBoard:
             for i in range(self._ROW_COUNT - 1, -1, -1):
                 if self._board[i][column] == "":
                     if color == "red":
-                        self._board[i][column] = "🔴"
+                        self._board[i][column] = self._COIN_RED
                         return True
                     else:
-                        self._board[i][column] = "🟡"
+                        self._board[i][column] = self._COIN_YELLOW
                         return True
 
             return False
