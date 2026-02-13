@@ -43,16 +43,19 @@ class Players(ABC):
 
 class HumanPlayer(Players):
 
-    def play_turn(self, board):
-        column = int(input(f"Player {self.player_no}, choose column: "))
-        print(f"Player {self.player_no} plays column {column}")
-        return column
-
-
     def surrender_game(self):
         print(f"Player {self.player_no} surrendered!")
 
-
+    def play_turn(self, board):
+        while True:
+            column = input(f"Player{self.player_no}, choose column: ")
+            if column in ("0", "1", "2", "3", "4", "5", "6"):
+                return int(column)
+            elif column == "I surrender!":
+                self.surrender_game()
+                return None
+            else:
+                print("Invalid input. Please enter a column or surrender your soul.\n")
 
 
 class Bot(Players):

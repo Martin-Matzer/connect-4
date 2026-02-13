@@ -35,7 +35,13 @@ game_over = False
 
 while not game_over:
 
-    while not board.add_coin(player1.color, player1.play_turn(board)):
+    move = player1.play_turn(board)
+    if move is None:
+        print(f"{player2.name} has won the game! {player1.name} surrendered.")
+        game_over = True
+        break
+
+    while not board.add_coin(player1.color, move):
         print("The last turn was not valid. Please enter a valid column.")
 
     board.print_board()
@@ -50,7 +56,15 @@ while not game_over:
         game_over = True
         break
 
-    while not board.add_coin(player2.color, player2.play_turn(board)):
+
+    move = player2.play_turn(board)
+    if move is None:
+        print(f"{player1.name} has won the game! {player2.name} surrendered.")
+        game_over = True
+        break
+    
+
+    while not board.add_coin(player2.color, move):
         print("The last turn was not valid. Please enter a valid column.")
 
         if board.check_for_winner(player1.color):
