@@ -199,6 +199,12 @@ class TestWinCheck(unittest.TestCase):
         self.assertFalse(self.board.check_for_winner("red"))
         self.board.print_board()
 
+    def test_win_check_with_invalid_color(self):
+        """Checking for a winner with an invalid color should return string "Error, invalid color!" and not change the board."""
+        board_copy = self.board._board
+        self.assertEqual(self.board.check_for_winner("green"), "Error, invalid color!")
+        self.assertEqual(self.board._board, board_copy)
+
 
 class TestDrawCheck(unittest.TestCase):
     """
