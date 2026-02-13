@@ -46,7 +46,7 @@ class GameBoard:
 
         print("\n   +----+----+----+----+----+----+----+")
 
-    def add_coin(self, color: str, column: int) -> bool:
+    def add_coin(self, color: str, column: int) -> bool | str:
         """
         Method for adding a new coin into the game board if the turn is valid.
 
@@ -62,10 +62,15 @@ class GameBoard:
 
         Returns
         -------
-        :return: bool
+        :return: bool | str
             True for a valid turn and successful adding to game board.
             False for a not valid turn when coin cannot be added to the given column.
+            "Error, invalid column!" if the provided column is not valid.
         """
+
+        # Check if the provided column is in valid range
+        if column < 0 or column >= self._COLUMN_COUNT:
+            return "Error, invalid column!"
 
         # Check if the given column is already full
         if self._board[0][column] != "":
@@ -83,7 +88,7 @@ class GameBoard:
 
             return False
 
-    def check_for_winner(self, color: str) -> bool:
+    def check_for_winner(self, color: str) -> bool | str:
         """
         Check the board for winner with the provided coin.
 
@@ -96,15 +101,18 @@ class GameBoard:
 
         Returns
         -------
-        :return: bool
+        :return: bool | str
             True if the provided coin has won.
             False if the provided coin has not won yet.
+            "Error, invalid color!" if the provided color is not valid.
         """
 
         if color == "red":
-            coin = "🔴"
+            coin = self._COIN_RED
+        elif color == "yellow":
+            coin = self._COIN_YELLOW
         else:
-            coin = "🟡"
+            return "Error, invalid color!"
 
         # check for horizontal win
         for r in range(self._ROW_COUNT):
@@ -139,7 +147,8 @@ class GameBoard:
 
         Returns
         -------
-        :return: bool - True if draw otherwise False
+        :return: bool
+            True if draw otherwise False
         """
 
         draw = True
