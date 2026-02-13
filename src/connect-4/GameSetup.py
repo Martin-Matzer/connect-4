@@ -47,6 +47,17 @@ class GameSetup:
         print(f"{starter.name} beginns!")
         starter.onturn = True
 
+    # Method to trigger play again
+    def play_again(self):
+        while True:
+            play_again = input("Play again? Please enter yes or no:").lower()
+            if play_again == "yes":
+                return True
+            elif play_again == "no":
+                return False
+            else:
+                print("Invalid input. Please enter yes or no")
+
 
 if __name__ == '__main__':
     setup = GameSetup()
@@ -56,3 +67,4 @@ if __name__ == '__main__':
     print(players)
     print(players[0], players[1])
     setup.pick_starting_player(players)
+    print(setup.play_again())
