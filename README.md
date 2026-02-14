@@ -31,7 +31,7 @@ python main.py
 
 The project uses **unittest**. The package lives in `src/`, so Python must see that folder when importing `connect4`.
 
-### Option 1: Command line (from project root)
+### Option 1: Command line (from project root) when package was not installed
 
 ```bash
 # Run one test file
@@ -44,9 +44,9 @@ PYTHONPATH=src python -m unittest tests.test_game_board.TestWinCheck -v
 PYTHONPATH=src python -m unittest tests.test_game_board.TestWinCheck.test_horizontal_win_red -v
 ```
 
-### Option 2: After editable install (no PYTHONPATH needed)
+### Option 2: After package installation (no PYTHONPATH needed)
 
 ```bash
-pip install -e .
+pip install .
 python -m unittest discover -v -s tests -p "test_*.py"
 ```
