@@ -1,0 +1,19 @@
+[build-system]
+# Tells pip which tool to use when you run "pip install ."
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "connect4"
+version = "1.0.0"
+description = "Connect 4 game programmed in Python"
+readme = "README.md"
+authors = [
+    { name = "Melina Fellner" },
+    { name = "Martin Matzer" },
+]
+requires-python = ">=3.8"
+
+[tool.setuptools.packages.find]
+# Your package lives in src/connect4/ (called "src layout")
+where = ["src"]

@@ -1,7 +1,5 @@
 #File to execute the game logic itself
-from game_setup import GameSetup
-from players import HumanPlayer, Bot
-from game_board import GameBoard
+from connect4 import GameSetup, GameBoard
 
 print("Welcome to Connect-4!")
 print("""

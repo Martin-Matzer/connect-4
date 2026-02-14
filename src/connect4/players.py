@@ -17,7 +17,7 @@ SmartBot
 
 from abc import ABC, abstractmethod
 import random
-from game_board import GameBoard
+from .game_board import GameBoard
 
 
 
